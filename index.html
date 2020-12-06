@@ -152,6 +152,71 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-丢失的MD5" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/06/%E4%B8%A2%E5%A4%B1%E7%9A%84MD5/">丢失的MD5</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/06/%E4%B8%A2%E5%A4%B1%E7%9A%84MD5/" class="archive-article-date">
+  	<time datetime="2020-12-06T02:56:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h2><p>打开文件发现有一个py，本地运行出错<br><img src="D:\blog\myblog\public\img/1.png"><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010082526/article/details/81064957">戳这里</a><br>接下来对原码进行修改<br>原码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib  </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">32</span>,<span class="number">127</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">32</span>,<span class="number">127</span>):</span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">32</span>,<span class="number">127</span>):</span><br><span class="line">            m=hashlib.md5()</span><br><span class="line">            m.update(<span class="string">&#x27;TASC&#x27;</span>+chr(i)+<span class="string">&#x27;O3RJMV&#x27;</span>+chr(j)+<span class="string">&#x27;WDJKX&#x27;</span>+chr(k)+<span class="string">&#x27;ZM&#x27;</span>)</span><br><span class="line">            des=m.hexdigest()</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;e9032&#x27;</span> <span class="keyword">in</span> des and <span class="string">&#x27;da&#x27;</span> <span class="keyword">in</span> des and <span class="string">&#x27;911513&#x27;</span> <span class="keyword">in</span> des:</span><br><span class="line">                print des</span><br></pre></td></tr></table></figure>
+<p>  修改后：<br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">32</span>,<span class="number">127</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">32</span>,<span class="number">127</span>):</span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">32</span>,<span class="number">127</span>):</span><br><span class="line">            m=hashlib.md5()</span><br><span class="line">            m.update(<span class="string">&#x27;TASC&#x27;</span>.encode(<span class="string">&#x27;utf-8&#x27;</span>)+chr(i).encode(<span class="string">&#x27;utf-8&#x27;</span>)+<span class="string">&#x27;O3RJMV&#x27;</span>.encode(<span class="string">&#x27;utf-8&#x27;</span>)+chr(j).encode(<span class="string">&#x27;utf-8&#x27;</span>)+<span class="string">&#x27;WDJKX&#x27;</span>.encode(<span class="string">&#x27;utf-8&#x27;</span>)+chr(k).encode(<span class="string">&#x27;utf-8&#x27;</span>)+<span class="string">&#x27;ZM&#x27;</span>.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">            des=m.hexdigest()</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;e9032&#x27;</span> <span class="keyword">in</span> des and <span class="string">&#x27;da&#x27;</span> <span class="keyword">in</span> des and <span class="string">&#x27;911513&#x27;</span> <span class="keyword">in</span> des:</span><br><span class="line">                print (des)</span><br></pre></td></tr></table></figure><br>运行后得e9032994dabac08080091151380478a2</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/06/%E4%B8%A2%E5%A4%B1%E7%9A%84MD5/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-变异凯撒" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -177,7 +242,7 @@
 <p>这时你会发现                                   5   ， 6   ，7 ，  8</p>
 <p>于是发现是按顺序从5开始从每个递增加上1.<br>写一段带就可以解出flag</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">str=<span class="string">&quot;afZ_r9VYfScOeO_UL^RWUc&quot;</span></span><br><span class="line">i =<span class="number">5</span></span><br><span class="line">flag=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> str:</span><br><span class="line">    flag+=chr(ord(s)+i)</span><br><span class="line">    i+=<span class="number">1</span></span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
-<p>解得flag{Caesar_variation}</p>
+<p>解得flag{Caesar_variation}<br>```</p>
 
       
 
