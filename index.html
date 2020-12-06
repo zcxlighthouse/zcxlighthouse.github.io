@@ -152,6 +152,74 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-变异凯撒" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/06/%E5%8F%98%E5%BC%82%E5%87%AF%E6%92%92/">变异凯撒</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/06/%E5%8F%98%E5%BC%82%E5%87%AF%E6%92%92/" class="archive-article-date">
+  	<time datetime="2020-12-06T01:47:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="写题过程"><a href="#写题过程" class="headerlink" title="写题过程"></a>写题过程</h2><p>加密密文：afZ_r9VYfScOeO_UL^RWUc<br>格式：flag{ }<br>这里我们发现a, f, Z, _的ASCii码是 97， 102， 90， 95</p>
+<p>而再看这里flag{}的ASCii码是——–102，108，97，103；</p>
+<p>这时你会发现                                   5   ， 6   ，7 ，  8</p>
+<p>于是发现是按顺序从5开始从每个递增加上1.<br>写一段带就可以解出flag</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">str=<span class="string">&quot;afZ_r9VYfScOeO_UL^RWUc&quot;</span></span><br><span class="line">i =<span class="number">5</span></span><br><span class="line">flag=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> str:</span><br><span class="line">    flag+=chr(ord(s)+i)</span><br><span class="line">    i+=<span class="number">1</span></span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+<p>解得flag{Caesar_variation}</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/06/%E5%8F%98%E5%BC%82%E5%87%AF%E6%92%92/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
