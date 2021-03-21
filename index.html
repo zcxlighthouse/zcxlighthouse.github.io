@@ -152,6 +152,179 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-rsa小结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/21/rsa%E5%B0%8F%E7%BB%93/">rsa小结</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/21/rsa%E5%B0%8F%E7%BB%93/" class="archive-article-date">
+  	<time datetime="2021-03-21T04:22:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="第一类已知p-q-e求d"><a href="#第一类已知p-q-e求d" class="headerlink" title="第一类已知p,q,e求d"></a>第一类已知p,q,e求d</h2><p>edmod(q-1)(p-1)=1</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line">p = </span><br><span class="line">q = </span><br><span class="line">e = </span><br><span class="line"> </span><br><span class="line">l = (p-<span class="number">1</span>)*(q-<span class="number">1</span>)</span><br><span class="line">d = gmpy2.invert(e,l)</span><br><span class="line">print (<span class="string">&quot;dec: &quot;</span> + str(d))</span><br></pre></td></tr></table></figure>
+
+<h2 id="第二类-已知n，e，c求m"><a href="#第二类-已知n，e，c求m" class="headerlink" title="第二类 已知n，e，c求m"></a>第二类 已知n，e，c求m</h2><p>先分解n，求p，q。 yafu，在线都可以<br>再求d</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line">p =</span><br><span class="line">q =</span><br><span class="line">e =</span><br><span class="line"> </span><br><span class="line">l = (p-<span class="number">1</span>)*(q-<span class="number">1</span>)</span><br><span class="line">d = gmpy2.invert(e,l)</span><br><span class="line">print (<span class="string">&quot;dec: &quot;</span> + str(d))</span><br></pre></td></tr></table></figure>
+<p>最后求明文</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">n=</span><br><span class="line">d=</span><br><span class="line">c=</span><br><span class="line">m=pow(c,d,n)</span><br><span class="line">print(long_to_bytes(m))</span><br></pre></td></tr></table></figure>
+
+<h2 id="第三类-已知密文文件-flag-enc-cipher-bin-flag-b64和-公钥文件-pubkey-pem-key-pem-key-pub求解明文-m"><a href="#第三类-已知密文文件-flag-enc-cipher-bin-flag-b64和-公钥文件-pubkey-pem-key-pem-key-pub求解明文-m" class="headerlink" title="第三类 已知密文文件 flag.enc  / cipher.bin /flag.b64和 公钥文件 pubkey.pem /key.pem /key.pub求解明文 m"></a>第三类 已知密文文件 flag.enc  / cipher.bin /flag.b64和 公钥文件 pubkey.pem /key.pem /key.pub求解明文 m</h2><p>首先可以用openssl读取公钥文件<br>命令为：rsa -pubin -text -modulus -in warmup -in pub.ket<br>可以得到n，e<br>然后求d（方法参见上文）</p>
+<p>之后用python读取密文文件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">with</span> open (r<span class="string">&quot;路径+flag.enc&quot;</span>,<span class="string">&quot;rb&quot;</span>)<span class="keyword">as</span> f:  <span class="comment">//不加路径python找不到文件</span></span><br><span class="line"></span><br><span class="line">    c=f.read()</span><br><span class="line">    c=bytes_to_long(c)</span><br><span class="line">print(c)</span><br></pre></td></tr></table></figure>
+<p>我们就得到c了<br>有了c，d，n就可求m</p>
+<h2 id="第四类-低加密指数攻击。已知n，e，c求m，且e很小-n很大又不好分解"><a href="#第四类-低加密指数攻击。已知n，e，c求m，且e很小-n很大又不好分解" class="headerlink" title="第四类 低加密指数攻击。已知n，e，c求m，且e很小 n很大又不好分解"></a>第四类 低加密指数攻击。已知n，e，c求m，且e很小 n很大又不好分解</h2><pre><code>直接爆破，或者低指数广播攻击。
+当M^e &lt; n 时，
+C = M^e ，所以对C开方就能得到M
+
+当M^e ＞ n 时，此时用爆破的方法
+假设我们Ｍ^e/n的商为 k 余数为C，
+则Ｍ^e = kn + C，对K进行爆破，只要k满足 kn + C能够开e次方就可以得明文</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> iroot</span><br><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line">e = </span><br><span class="line">n = </span><br><span class="line">c = </span><br><span class="line"></span><br><span class="line">k = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">    res = iroot(c+k*n,e)  </span><br><span class="line">    <span class="keyword">if</span>(res[<span class="number">1</span>] == True):</span><br><span class="line">        print(libnum.n2s(int(res[<span class="number">0</span>]))) 串</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    k=k+<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="第五类已知e，n，dp，c求m"><a href="#第五类已知e，n，dp，c求m" class="headerlink" title="第五类已知e，n，dp，c求m"></a>第五类已知e，n，dp，c求m</h2><p>可用条件：<br>        dp=d%(p-1)<br>        ed☰1 mod (p-1)(q-1)<br>    推导过程：所以 k1(p-1)+dp=d<br>        k2(p-1)(q-1)+ed=1<br>        从而可以可以得到<br>        k2(p-1)(q-1)+ek1(p-1)+edp=1<br>        两边对p-1取余得<br>        edp%(p-1)=1<br>        所以edp=k(p-1)+1<br>        所以k=(edp-1)/(p-1)=e(dp/(p-1))-1/(p-1)<br>        由dp=d%(p-1)我们可以知道dp&lt;p-1,因此我们很容易得到k的上限要小于e<br>        因此只需要遍历range(1,e) ,若n整除p,即可得到p。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2 <span class="keyword">as</span> gp</span><br><span class="line"></span><br><span class="line">e = </span><br><span class="line">n = </span><br><span class="line">dp = </span><br><span class="line">c = </span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, e):  </span><br><span class="line">    <span class="keyword">if</span> (dp * e - <span class="number">1</span>) % i == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">if</span> n % (((dp * e - <span class="number">1</span>) <span class="comment">// i) + 1) == 0:  </span></span><br><span class="line">            p = ((dp * e - <span class="number">1</span>) <span class="comment">// i) + 1</span></span><br><span class="line">            q = n <span class="comment">// (((dp * e - 1) // i) + 1)</span></span><br><span class="line">            phi = (q - <span class="number">1</span>) * (p - <span class="number">1</span>) </span><br><span class="line">            d = gp.invert(e, phi)  </span><br><span class="line">            m = pow(c, d, n)  </span><br><span class="line">print(bytes.fromhex(hex(m)[<span class="number">2</span>:]))</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="第六类-已知-dp-dq-p-q-c-求m"><a href="#第六类-已知-dp-dq-p-q-c-求m" class="headerlink" title="第六类 已知(dp,dq,p,q,c)求m"></a>第六类 已知(dp,dq,p,q,c)求m</h2><pre><code> 1.计算q模p的逆元记为I
+ 2.计算m1=(c^dp) mod p
+ 3.计算m2=(c^dq) mod q
+ 可得m=(((m1 - m2) * I) mod p) * q + m2
+ [数学推导过程](https://blog.csdn.net/weixin_44110537/article/details/106739798)</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">p = </span><br><span class="line">q = </span><br><span class="line">dp = </span><br><span class="line">dq = </span><br><span class="line">c = </span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">I = gmpy2.invert(q,p)</span><br><span class="line">m1 = pow(c,dp,p)</span><br><span class="line">m2 = pow(c,dq,q)              </span><br><span class="line"></span><br><span class="line">m = (((m1-m2)*I)%p)*q+m2     </span><br><span class="line"></span><br><span class="line">print(long_to_bytes(m))</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/21/rsa%E5%B0%8F%E7%BB%93/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-刷题记录（三）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/21/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95%EF%BC%88%E4%B8%89%EF%BC%89/">刷题记录（三）</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/21/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95%EF%BC%88%E4%B8%89%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2021-03-21T03:47:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="BUU-Dangerous-RSA"><a href="#BUU-Dangerous-RSA" class="headerlink" title="BUU Dangerous RSA"></a>BUU Dangerous RSA</h2><p>打开下载的文件发现是低加密指数攻击，e很小，n很大又不好分解<br>已知n，e，c求m。rsa求m公式C=M^e % n<br>当M^e &lt; n 时，<br>C = M^e ，所以对C开方就能得到M</p>
+<p>当M^e ＞ n 时，此时用爆破的方法<br>假设我们Ｍ^e/n的商为 k 余数为C，<br>则Ｍ^e = kn + C，对K进行爆破，只要k满足 kn + C能够开e次方就可以得明文</p>
+<p>假设e=3。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> iroot</span><br><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line">e = <span class="number">0x3</span></span><br><span class="line">n = <span class="number">0x52d483c27cd806550fbe0e37a61af2e7cf5e0efb723dfc81174c918a27627779b21fa3c851e9e94188eaee3d5cd6f752406a43fbecb53e80836ff1e185d3ccd7782ea846c2e91a7b0808986666e0bdadbfb7bdd65670a589a4d2478e9adcafe97c6ee23614bcb2ecc23580f4d2e3cc1ecfec25c50da4bc754dde6c8bfd8d1fc16956c74d8e9196046a01dc9f3024e11461c294f29d7421140732fedacac97b8fe50999117d27943c953f18c4ff4f8c258d839764078d4b6ef6e8591e0ff5563b31a39e6374d0d41c8c46921c25e5904a817ef8e39e5c9b71225a83269693e0b7e3218fc5e5a1e8412ba16e588b3d6ac536dce39fcdfce81eec79979ea6872793</span></span><br><span class="line">c = <span class="number">0x10652cdfaa6b63f6d7bd1109da08181e500e5643f5b240a9024bfa84d5f2cac9310562978347bb232d63e7289283871efab83d84ff5a7b64a94a79d34cfbd4ef121723ba1f663e514f83f6f01492b4e13e1bb4296d96ea5a353d3bf2edd2f449c03c4a3e995237985a596908adc741f32365</span></span><br><span class="line"></span><br><span class="line">k = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">    res = iroot(c+k*n,e)  </span><br><span class="line">    <span class="keyword">if</span>(res[<span class="number">1</span>] == True):</span><br><span class="line">        print(libnum.n2s(int(res[<span class="number">0</span>]))) 串</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    k=k+<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>解得flag{25df8caf006ee5db94d48144c33b2c3b}</p>
+<h2 id="BUU-HDCTF2019-basic-rsa-1"><a href="#BUU-HDCTF2019-basic-rsa-1" class="headerlink" title="BUU [HDCTF2019]basic rsa 1"></a>BUU [HDCTF2019]basic rsa 1</h2><p>打开文件</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> binascii <span class="keyword">import</span> a2b_hex,b2a_hex</span><br><span class="line"></span><br><span class="line">flag = <span class="string">&quot;*****************&quot;</span></span><br><span class="line"></span><br><span class="line">p = <span class="number">262248800182277040650192055439906580479</span></span><br><span class="line">q = <span class="number">262854994239322828547925595487519915551</span></span><br><span class="line"></span><br><span class="line">e = <span class="number">65533</span></span><br><span class="line">n = p*q</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">c = pow(int(b2a_hex(flag),<span class="number">16</span>),e,n)</span><br><span class="line"></span><br><span class="line">print c</span><br><span class="line"></span><br><span class="line"># 27565231154623519221597938803435789010285480123476977081867877272451638645710</span><br></pre></td></tr></table></figure>
+<p>题目给的已知信息包括p，q，e，c<br>要求我们求出明文m，并以字符串形式输出<br>先求d</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line">p = <span class="number">262248800182277040650192055439906580479</span></span><br><span class="line">q = <span class="number">262854994239322828547925595487519915551</span></span><br><span class="line">e = <span class="number">65533</span></span><br><span class="line"> </span><br><span class="line">s = (p-<span class="number">1</span>)*(q-<span class="number">1</span>)</span><br><span class="line">d = gmpy2.invert(e,s)</span><br><span class="line">print (<span class="string">&quot;dec: &quot;</span> + str(d))</span><br></pre></td></tr></table></figure>
+<p>求得d=51938044911383735496696766945348482589325573182146510406365903911685548598997</p>
+<p>再求m</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">p = <span class="number">262248800182277040650192055439906580479</span></span><br><span class="line">q = <span class="number">262854994239322828547925595487519915551</span></span><br><span class="line">n=p*q</span><br><span class="line">d=<span class="number">51938044911383735496696766945348482589325573182146510406365903911685548598997</span></span><br><span class="line">c=<span class="number">27565231154623519221597938803435789010285480123476977081867877272451638645710</span></span><br><span class="line"></span><br><span class="line">m=pow(c,d,n)</span><br><span class="line">print(long_to_bytes(m))</span><br></pre></td></tr></table></figure>
+<p>得flag{B4by_Rs4}</p>
+<h2 id="BUURSA2"><a href="#BUURSA2" class="headerlink" title="BUURSA2"></a>BUURSA2</h2><p>题目给出e，n，dp，c<br>求m<br>发现题目所给的n的值过大,很难得到分解的两个素数.需要借助dp来求解素数p,然后求得素数q<br>由已知条件可得dp=d%(p-1)，ed☰1 mod (p-1)(q-1)———–&lt;1&gt;</p>
+<p>假设k1和k2， 满足k1(p-1)+dp=d，k2(p-1)(q-1)+ed=1———&lt;2&gt;</p>
+<p>由&lt;1&gt;到&lt;2&gt;不懂可以参考<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%90%8C%E4%BD%99%E5%AE%9A%E7%90%86/1212360?fromtitle=%E5%90%8C%E4%BD%99&fromid=1432545&fr=aladdin">同余</a></p>
+<p>然后可得k2(p-1)(q-1)+ek1(p-1)+edp=1<br>两边对p-1取余得<br>edp%(p-1)=1<br>所以edp=k(p-1)+1<br>所以k=(edp-1)/(p-1)<br>容易看出k小于e<br>所以只需要遍历range(1,e) ,若n整除p,即可得到p </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2 <span class="keyword">as</span> gp</span><br><span class="line"></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">n = <span class="number">248254007851526241177721526698901802985832766176221609612258877371620580060433101538328030305219918697643619814200930679612109885533801335348445023751670478437073055544724280684733298051599167660303645183146161497485358633681492129668802402065797789905550489547645118787266601929429724133167768465309665906113</span></span><br><span class="line">dp = <span class="number">905074498052346904643025132879518330691925174573054004621877253318682675055421970943552016695528560364834446303196939207056642927148093290374440210503657</span></span><br><span class="line"></span><br><span class="line">c = <span class="number">140423670976252696807533673586209400575664282100684119784203527124521188996403826597436883766041879067494280957410201958935737360380801845453829293997433414188838725751796261702622028587211560353362847191060306578510511380965162133472698713063592621028959167072781482562673683090590521214218071160287665180751</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, e):  </span><br><span class="line">    <span class="keyword">if</span> (dp * e - <span class="number">1</span>) % i == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">if</span> n % (((dp * e - <span class="number">1</span>) <span class="comment">// i) + 1) == 0:  </span></span><br><span class="line">            p = ((dp * e - <span class="number">1</span>) <span class="comment">// i) + 1</span></span><br><span class="line">            q = n <span class="comment">// (((dp * e - 1) // i) + 1)</span></span><br><span class="line">            phi = (q - <span class="number">1</span>) * (p - <span class="number">1</span>) </span><br><span class="line">            d = gp.invert(e, phi)  </span><br><span class="line">            m = pow(c, d, n)  </span><br><span class="line">print(bytes.fromhex(hex(m)[<span class="number">2</span>:]))</span><br></pre></td></tr></table></figure>
+<p>得到flag{wow_leaking_dp_breaks_rsa?_98924743502}</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/21/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95%EF%BC%88%E4%B8%89%EF%BC%89/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-刷题记录（二）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
