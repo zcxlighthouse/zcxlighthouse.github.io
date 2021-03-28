@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>rsa小结 | Hexo</title>
+  <title>刷题记录（三） | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="第一类已知p,q,e求dedmod(q-1)(p-1)&#x3D;1 123456789import gmpy2p &#x3D; q &#x3D; e &#x3D;  l &#x3D; (p-1)*(q-1)d &#x3D; gmpy2.invert(e,l)print (&quot;dec: &quot; + str(d))  第二类 已知n，e，c求m先分解n，求p，q。 yafu，在线都可以再求d 12345678import gmpy2p &#x3D;q &#x3D;">
+  <meta name="description" content="BUU BabyRsa打开文件得到 12345p+q : 0x1232fecb92adead91613e7d9ae5e36fe6bb765317d6ed38ad890b4073539a6231a6620584cea5730b5af83a3e80cf30141282c97be4400e33307573af6b25e2ea(p+1)(q+1)：0x5248becef1d925d45705a730270">
 <meta property="og:type" content="article">
-<meta property="og:title" content="rsa小结">
-<meta property="og:url" content="http://example.com/2021/03/21/rsa%E5%B0%8F%E7%BB%93/index.html">
+<meta property="og:title" content="刷题记录（三）">
+<meta property="og:url" content="http://example.com/2021/03/28/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95%EF%BC%88%E5%9B%9B%EF%BC%89/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="第一类已知p,q,e求dedmod(q-1)(p-1)&#x3D;1 123456789import gmpy2p &#x3D; q &#x3D; e &#x3D;  l &#x3D; (p-1)*(q-1)d &#x3D; gmpy2.invert(e,l)print (&quot;dec: &quot; + str(d))  第二类 已知n，e，c求m先分解n，求p，q。 yafu，在线都可以再求d 12345678import gmpy2p &#x3D;q &#x3D;">
+<meta property="og:description" content="BUU BabyRsa打开文件得到 12345p+q : 0x1232fecb92adead91613e7d9ae5e36fe6bb765317d6ed38ad890b4073539a6231a6620584cea5730b5af83a3e80cf30141282c97be4400e33307573af6b25e2ea(p+1)(q+1)：0x5248becef1d925d45705a730270">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-03-21T04:22:26.000Z">
-<meta property="article:modified_time" content="2021-03-21T05:08:58.448Z">
+<meta property="article:published_time" content="2021-03-28T04:42:12.000Z">
+<meta property="article:modified_time" content="2021-03-28T05:48:56.758Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -154,48 +154,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-rsa小结" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-刷题记录（四）" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      rsa小结
+      刷题记录（三）
     </h1>
   
 
         
-        <a href="/2021/03/21/rsa%E5%B0%8F%E7%BB%93/" class="archive-article-date">
-  	<time datetime="2021-03-21T04:22:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-21</time>
+        <a href="/2021/03/28/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95%EF%BC%88%E5%9B%9B%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2021-03-28T04:42:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="第一类已知p-q-e求d"><a href="#第一类已知p-q-e求d" class="headerlink" title="第一类已知p,q,e求d"></a>第一类已知p,q,e求d</h2><p>edmod(q-1)(p-1)=1</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line">p = </span><br><span class="line">q = </span><br><span class="line">e = </span><br><span class="line"> </span><br><span class="line">l = (p-<span class="number">1</span>)*(q-<span class="number">1</span>)</span><br><span class="line">d = gmpy2.invert(e,l)</span><br><span class="line">print (<span class="string">&quot;dec: &quot;</span> + str(d))</span><br></pre></td></tr></table></figure>
-
-<h2 id="第二类-已知n，e，c求m"><a href="#第二类-已知n，e，c求m" class="headerlink" title="第二类 已知n，e，c求m"></a>第二类 已知n，e，c求m</h2><p>先分解n，求p，q。 yafu，在线都可以<br>再求d</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line">p =</span><br><span class="line">q =</span><br><span class="line">e =</span><br><span class="line"> </span><br><span class="line">l = (p-<span class="number">1</span>)*(q-<span class="number">1</span>)</span><br><span class="line">d = gmpy2.invert(e,l)</span><br><span class="line">print (<span class="string">&quot;dec: &quot;</span> + str(d))</span><br></pre></td></tr></table></figure>
-<p>最后求明文</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">n=</span><br><span class="line">d=</span><br><span class="line">c=</span><br><span class="line">m=pow(c,d,n)</span><br><span class="line">print(long_to_bytes(m))</span><br></pre></td></tr></table></figure>
-
-<h2 id="第三类-已知密文文件-flag-enc-cipher-bin-flag-b64和-公钥文件-pubkey-pem-key-pem-key-pub求解明文-m"><a href="#第三类-已知密文文件-flag-enc-cipher-bin-flag-b64和-公钥文件-pubkey-pem-key-pem-key-pub求解明文-m" class="headerlink" title="第三类 已知密文文件 flag.enc  / cipher.bin /flag.b64和 公钥文件 pubkey.pem /key.pem /key.pub求解明文 m"></a>第三类 已知密文文件 flag.enc  / cipher.bin /flag.b64和 公钥文件 pubkey.pem /key.pem /key.pub求解明文 m</h2><p>首先可以用openssl读取公钥文件<br>命令为：rsa -pubin -text -modulus -in warmup -in pub.ket<br>可以得到n，e<br>然后求d（方法参见上文）</p>
-<p>之后用python读取密文文件</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">with</span> open (r<span class="string">&quot;路径+flag.enc&quot;</span>,<span class="string">&quot;rb&quot;</span>)<span class="keyword">as</span> f:  <span class="comment">//不加路径python找不到文件</span></span><br><span class="line"></span><br><span class="line">    c=f.read()</span><br><span class="line">    c=bytes_to_long(c)</span><br><span class="line">print(c)</span><br></pre></td></tr></table></figure>
-<p>我们就得到c了<br>有了c，d，n就可求m</p>
-<h2 id="第四类-低加密指数攻击。已知n，e，c求m，且e很小-n很大又不好分解"><a href="#第四类-低加密指数攻击。已知n，e，c求m，且e很小-n很大又不好分解" class="headerlink" title="第四类 低加密指数攻击。已知n，e，c求m，且e很小 n很大又不好分解"></a>第四类 低加密指数攻击。已知n，e，c求m，且e很小 n很大又不好分解</h2><p>直接爆破，或者低指数广播攻击。<br>当M^e &lt; n 时，<br>C = M^e ，所以对C开方就能得到M</p>
-<p>当M^e ＞ n 时，此时用爆破的方法<br>假设我们Ｍ^e/n的商为 k 余数为C，<br>则Ｍ^e = kn + C，对K进行爆破，只要k满足 kn + C能够开e次方就可以得明文</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> iroot</span><br><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line">e = </span><br><span class="line">n = </span><br><span class="line">c = </span><br><span class="line"></span><br><span class="line">k = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">    res = iroot(c+k*n,e)  </span><br><span class="line">    <span class="keyword">if</span>(res[<span class="number">1</span>] == True):</span><br><span class="line">        print(libnum.n2s(int(res[<span class="number">0</span>]))) 串</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    k=k+<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="第五类已知e，n，dp，c求m"><a href="#第五类已知e，n，dp，c求m" class="headerlink" title="第五类已知e，n，dp，c求m"></a>第五类已知e，n，dp，c求m</h2><p>可用条件：<br>        dp=d%(p-1)<br>        ed☰1 mod (p-1)(q-1)<br>推导过程：所以 k1(p-1)+dp=d<br>        k2(p-1)(q-1)+ed=1<br>        从而可以可以得到<br>        k2(p-1)(q-1)+ek1(p-1)+edp=1<br>        两边对p-1取余得<br>        edp%(p-1)=1<br>        所以edp=k(p-1)+1<br>        所以k=(edp-1)/(p-1)=e(dp/(p-1))-1/(p-1)<br>        由dp=d%(p-1)我们可以知道dp&lt;p-1,因此我们很容易得到k的上限要小于e<br>        因此只需要遍历range(1,e) ,若n整除p,即可得到p。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2 <span class="keyword">as</span> gp</span><br><span class="line"></span><br><span class="line">e = </span><br><span class="line">n = </span><br><span class="line">dp = </span><br><span class="line">c = </span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, e):  </span><br><span class="line">    <span class="keyword">if</span> (dp * e - <span class="number">1</span>) % i == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">if</span> n % (((dp * e - <span class="number">1</span>) <span class="comment">// i) + 1) == 0:  </span></span><br><span class="line">            p = ((dp * e - <span class="number">1</span>) <span class="comment">// i) + 1</span></span><br><span class="line">            q = n <span class="comment">// (((dp * e - 1) // i) + 1)</span></span><br><span class="line">            phi = (q - <span class="number">1</span>) * (p - <span class="number">1</span>) </span><br><span class="line">            d = gp.invert(e, phi)  </span><br><span class="line">            m = pow(c, d, n)  </span><br><span class="line">print(bytes.fromhex(hex(m)[<span class="number">2</span>:]))</span><br></pre></td></tr></table></figure>
+        <h2 id="BUU-BabyRsa"><a href="#BUU-BabyRsa" class="headerlink" title="BUU BabyRsa"></a>BUU BabyRsa</h2><p>打开文件得到</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">p+q : <span class="number">0x1232fecb92adead91613e7d9ae5e36fe6bb765317d6ed38ad890b4073539a6231a6620584cea5730b5af83a3e80cf30141282c97be4400e33307573af6b25e2ea</span></span><br><span class="line">(p+<span class="number">1</span>)(q+<span class="number">1</span>)：<span class="number">0x5248becef1d925d45705a7302700d6a0ffe5877fddf9451a9c1181c4d82365806085fd86fbaab08b6fc66a967b2566d743c626547203b34ea3fdb1bc06dd3bb765fd8b919e3bd2cb15bc175c9498f9d9a0e216c2dde64d81255fa4c05a1ee619fc1fc505285a239e7bc655ec6605d9693078b800ee80931a7a0c84f33c851740</span></span><br><span class="line">e : <span class="number">0xe6b1bee47bd63f615c7d0a43c529d219</span></span><br><span class="line">d : <span class="number">0x2dde7fbaed477f6d62838d55b0d0964868cf6efb2c282a5f13e6008ce7317a24cb57aec49ef0d738919f47cdcd9677cd52ac2293ec5938aa198f962678b5cd0da344453f521a69b2ac03647cdd8339f4e38cec452d54e60698833d67f9315c02ddaa4c79ebaa902c605d7bda32ce970541b2d9a17d62b52df813b2fb0c5ab1a5</span></span><br><span class="line">enc_flag : <span class="number">0x50ae00623211ba6089ddfae21e204ab616f6c9d294e913550af3d66e85d0c0693ed53ed55c46d8cca1d7c2ad44839030df26b70f22a8567171a759b76fe5f07b3c5a6ec89117ed0a36c0950956b9cde880c575737f779143f921d745ac3bb0e379c05d9a3cc6bf0bea8aa91e4d5e752c7eb46b2e023edbc07d24a7c460a34a9a</span></span><br></pre></td></tr></table></figure>
+<p>若求m，还需要求n，n=(p+1)(q+1)-(p+q)-1</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">n=</span><br><span class="line">d=</span><br><span class="line">c= </span><br><span class="line">m=pow(c,d,n)</span><br><span class="line">print(long_to_bytes(m))</span><br></pre></td></tr></table></figure>
 
 
-<h2 id="第六类-已知-dp-dq-p-q-c-求m"><a href="#第六类-已知-dp-dq-p-q-c-求m" class="headerlink" title="第六类 已知(dp,dq,p,q,c)求m"></a>第六类 已知(dp,dq,p,q,c)求m</h2><p>1.计算q模p的逆元记为I<br>2.计算m1=(c^dp) mod p<br>3.计算m2=(c^dq) mod q<br>可得m=(((m1 - m2) * I) mod p) * q + m2<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44110537/article/details/106739798">数学推导过程</a></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">p = </span><br><span class="line">q = </span><br><span class="line">dp = </span><br><span class="line">dq = </span><br><span class="line">c = </span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">I = gmpy2.invert(q,p)</span><br><span class="line">m1 = pow(c,dp,p)</span><br><span class="line">m2 = pow(c,dq,q)              </span><br><span class="line"></span><br><span class="line">m = (((m1-m2)*I)%p)*q+m2     </span><br><span class="line"></span><br><span class="line">print(long_to_bytes(m))</span><br></pre></td></tr></table></figure>
+<h2 id="BUU-RSAROLL"><a href="#BUU-RSAROLL" class="headerlink" title="BUU RSAROLL"></a>BUU RSAROLL</h2><p>从题目可以得到n,p,q,e求m<br>给的c有很多行，我们需要对每一行进行一次解密，最后拼在一起就是明文。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line">N,p,q,e=<span class="number">920139713</span>,<span class="number">18443</span>,<span class="number">49891</span>,<span class="number">19</span></span><br><span class="line">d=gmpy2.invert(e,(p-<span class="number">1</span>)*(q-<span class="number">1</span>))</span><br><span class="line">result=[]</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(r<span class="string">&#x27;C:\Users\lighthouse\Desktop\data.txt&#x27;</span>,<span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():</span><br><span class="line">        line=line.strip(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">        result.append(chr(pow(int(line),d,N)))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> result:</span><br><span class="line">    print(i,end=<span class="string">&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>解得flag{13212je2ue28fy71w8u87y31r78eu1e2}</p>
+
       
 
       
@@ -274,7 +262,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/03/21/rsa%E5%B0%8F%E7%BB%93/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/03/28/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95%EF%BC%88%E5%9B%9B%EF%BC%89/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -289,8 +277,8 @@
 <nav id="article-nav">
   
   
-    <a href="/2021/03/21/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95%EF%BC%88%E4%B8%89%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">刷题记录（三）</div>
+    <a href="/2021/03/28/rsa%E5%B0%8F%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">rsa小结</div>
       <i class="icon-circle-right"></i>
     </a>
   

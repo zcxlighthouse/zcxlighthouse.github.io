@@ -152,6 +152,77 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-刷题记录（四）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/28/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95%EF%BC%88%E5%9B%9B%EF%BC%89/">刷题记录（三）</a>
+    </h1>
+  
+
+        
+        <a href="/2021/03/28/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95%EF%BC%88%E5%9B%9B%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2021-03-28T04:42:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="BUU-BabyRsa"><a href="#BUU-BabyRsa" class="headerlink" title="BUU BabyRsa"></a>BUU BabyRsa</h2><p>打开文件得到</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">p+q : <span class="number">0x1232fecb92adead91613e7d9ae5e36fe6bb765317d6ed38ad890b4073539a6231a6620584cea5730b5af83a3e80cf30141282c97be4400e33307573af6b25e2ea</span></span><br><span class="line">(p+<span class="number">1</span>)(q+<span class="number">1</span>)：<span class="number">0x5248becef1d925d45705a7302700d6a0ffe5877fddf9451a9c1181c4d82365806085fd86fbaab08b6fc66a967b2566d743c626547203b34ea3fdb1bc06dd3bb765fd8b919e3bd2cb15bc175c9498f9d9a0e216c2dde64d81255fa4c05a1ee619fc1fc505285a239e7bc655ec6605d9693078b800ee80931a7a0c84f33c851740</span></span><br><span class="line">e : <span class="number">0xe6b1bee47bd63f615c7d0a43c529d219</span></span><br><span class="line">d : <span class="number">0x2dde7fbaed477f6d62838d55b0d0964868cf6efb2c282a5f13e6008ce7317a24cb57aec49ef0d738919f47cdcd9677cd52ac2293ec5938aa198f962678b5cd0da344453f521a69b2ac03647cdd8339f4e38cec452d54e60698833d67f9315c02ddaa4c79ebaa902c605d7bda32ce970541b2d9a17d62b52df813b2fb0c5ab1a5</span></span><br><span class="line">enc_flag : <span class="number">0x50ae00623211ba6089ddfae21e204ab616f6c9d294e913550af3d66e85d0c0693ed53ed55c46d8cca1d7c2ad44839030df26b70f22a8567171a759b76fe5f07b3c5a6ec89117ed0a36c0950956b9cde880c575737f779143f921d745ac3bb0e379c05d9a3cc6bf0bea8aa91e4d5e752c7eb46b2e023edbc07d24a7c460a34a9a</span></span><br></pre></td></tr></table></figure>
+<p>若求m，还需要求n，n=(p+1)(q+1)-(p+q)-1</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">n=</span><br><span class="line">d=</span><br><span class="line">c= </span><br><span class="line">m=pow(c,d,n)</span><br><span class="line">print(long_to_bytes(m))</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="BUU-RSAROLL"><a href="#BUU-RSAROLL" class="headerlink" title="BUU RSAROLL"></a>BUU RSAROLL</h2><p>从题目可以得到n,p,q,e求m<br>给的c有很多行，我们需要对每一行进行一次解密，最后拼在一起就是明文。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line">N,p,q,e=<span class="number">920139713</span>,<span class="number">18443</span>,<span class="number">49891</span>,<span class="number">19</span></span><br><span class="line">d=gmpy2.invert(e,(p-<span class="number">1</span>)*(q-<span class="number">1</span>))</span><br><span class="line">result=[]</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(r<span class="string">&#x27;C:\Users\lighthouse\Desktop\data.txt&#x27;</span>,<span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():</span><br><span class="line">        line=line.strip(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">        result.append(chr(pow(int(line),d,N)))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> result:</span><br><span class="line">    print(i,end=<span class="string">&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>解得flag{13212je2ue28fy71w8u87y31r78eu1e2}</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/03/28/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95%EF%BC%88%E5%9B%9B%EF%BC%89/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-rsa小结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -159,13 +230,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/21/rsa%E5%B0%8F%E7%BB%93/">rsa小结</a>
+      <a class="article-title" href="/2021/03/28/rsa%E5%B0%8F%E7%BB%93/">rsa小结</a>
     </h1>
   
 
         
-        <a href="/2021/03/21/rsa%E5%B0%8F%E7%BB%93/" class="archive-article-date">
-  	<time datetime="2021-03-21T04:22:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-21</time>
+        <a href="/2021/03/28/rsa%E5%B0%8F%E7%BB%93/" class="archive-article-date">
+  	<time datetime="2021-03-28T04:22:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-28</time>
 </a>
         
       </header>
@@ -194,6 +265,16 @@
 
 <h2 id="第六类-已知-dp-dq-p-q-c-求m"><a href="#第六类-已知-dp-dq-p-q-c-求m" class="headerlink" title="第六类 已知(dp,dq,p,q,c)求m"></a>第六类 已知(dp,dq,p,q,c)求m</h2><p>1.计算q模p的逆元记为I<br>2.计算m1=(c^dp) mod p<br>3.计算m2=(c^dq) mod q<br>可得m=(((m1 - m2) * I) mod p) * q + m2<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44110537/article/details/106739798">数学推导过程</a></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">p = </span><br><span class="line">q = </span><br><span class="line">dp = </span><br><span class="line">dq = </span><br><span class="line">c = </span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">I = gmpy2.invert(q,p)</span><br><span class="line">m1 = pow(c,dp,p)</span><br><span class="line">m2 = pow(c,dq,q)              </span><br><span class="line"></span><br><span class="line">m = (((m1-m2)*I)%p)*q+m2     </span><br><span class="line"></span><br><span class="line">print(long_to_bytes(m))</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="第七类-n分解出多个质因子，求m"><a href="#第七类-n分解出多个质因子，求m" class="headerlink" title="第七类 n分解出多个质因子，求m"></a>第七类 n分解出多个质因子，求m</h2><p>当我们分解出三个质因子时p1，p2，p3</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> long_to_bytes</span><br><span class="line"> </span><br><span class="line">n= </span><br><span class="line">e= </span><br><span class="line">c= </span><br><span class="line">p1 = </span><br><span class="line">p2 = </span><br><span class="line">p3 = </span><br><span class="line">phi = (p1-<span class="number">1</span>)*(p2-<span class="number">1</span>)*(p3-<span class="number">1</span>)  </span><br><span class="line">d = gmpy2.invert(e, phi)  </span><br><span class="line">m = pow(c, d, n)  </span><br><span class="line">print long_to_bytes(m)</span><br></pre></td></tr></table></figure>
+
+<h2 id="第八类-按行加密"><a href="#第八类-按行加密" class="headerlink" title="第八类 按行加密"></a>第八类 按行加密</h2><p>一般给出n,e,p,q,d和c，但是c是按行排列的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">704796792</span></span><br><span class="line"><span class="number">752211152</span></span><br><span class="line"><span class="number">274704164</span></span><br><span class="line"><span class="number">18414022</span></span><br><span class="line"><span class="number">368270835</span></span><br><span class="line"><span class="number">483295235</span></span><br><span class="line"><span class="number">263072905</span></span><br><span class="line"><span class="number">459788476</span></span><br><span class="line"><span class="number">483295235</span></span><br><span class="line"><span class="number">459788476</span></span><br><span class="line"><span class="number">663551792</span></span><br><span class="line"><span class="number">475206804</span></span><br><span class="line"><span class="number">459788476</span></span><br><span class="line"><span class="number">428313374</span></span><br><span class="line"><span class="number">475206804</span></span><br><span class="line"><span class="number">459788476</span></span><br><span class="line"><span class="number">425392137</span></span><br><span class="line"><span class="number">704796792</span></span><br><span class="line"><span class="number">458265677</span></span><br><span class="line"><span class="number">341524652</span></span><br><span class="line"><span class="number">483295235</span></span><br><span class="line"><span class="number">534149509</span></span><br><span class="line"><span class="number">425392137</span></span><br><span class="line"><span class="number">428313374</span></span><br><span class="line"><span class="number">425392137</span></span><br><span class="line"><span class="number">341524652</span></span><br><span class="line"><span class="number">458265677</span></span><br><span class="line"><span class="number">263072905</span></span><br><span class="line"><span class="number">483295235</span></span><br><span class="line"><span class="number">828509797</span></span><br><span class="line"><span class="number">341524652</span></span><br><span class="line"><span class="number">425392137</span></span><br><span class="line"><span class="number">475206804</span></span><br><span class="line"><span class="number">428313374</span></span><br><span class="line"><span class="number">483295235</span></span><br><span class="line"><span class="number">475206804</span></span><br><span class="line"><span class="number">459788476</span></span><br><span class="line"><span class="number">306220148</span></span><br></pre></td></tr></table></figure>
+<p>这是我们需要对每一行进行解密，最后再连起来</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line">N,p,q,e=</span><br><span class="line">d=gmpy2.invert(e,(p-<span class="number">1</span>)*(q-<span class="number">1</span>))</span><br><span class="line">result=[] </span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(r<span class="string">&#x27;C:\Users\lighthouse\Desktop\data.txt&#x27;</span>,<span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines(): <span class="comment">//读取每行的数</span></span><br><span class="line">        line=line.strip(<span class="string">&#x27;\n&#x27;</span>) <span class="comment">//去掉每行的换行符</span></span><br><span class="line">        result.append(chr(pow(int(line),d,N))) <span class="comment">//将每行的值转成int型，进行解密计算，并转换成字符放入数组中</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> result:</span><br><span class="line">    print(i,end=<span class="string">&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
       
 
       
@@ -205,7 +286,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/21/rsa%E5%B0%8F%E7%BB%93/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/03/28/rsa%E5%B0%8F%E7%BB%93/">展开全文 >></a>
         </p>
       
 
