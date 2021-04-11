@@ -152,6 +152,153 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-GKCTF2020" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/11/GKCTF2020/">GKCTF2020</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/11/GKCTF2020/" class="archive-article-date">
+  	<time datetime="2021-04-11T03:49:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="GKCTF2020-小学生的密码学"><a href="#GKCTF2020-小学生的密码学" class="headerlink" title="[GKCTF2020]小学生的密码学"></a>[GKCTF2020]小学生的密码学</h2><p>题目：e(x)=11x+6(mod26)<br>     密文：welcylk<br>这是个数学计算题，仿射加密，和凯撒密码一样，属于“代换密码”。<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%BB%BF%E5%B0%84%E5%8A%A0%E5%AF%86%E6%B3%95/1708885?fr=aladdin">仿射加密</a><br>加密：c =E(m)=am+b (mod 26)    (其中p为明文，c为密文, 且a和m互质，m为字母的个数)<br>解密：p =w(c−b) (mod 26) (w为a的逆)<br>先解出w</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> invert</span><br><span class="line">a = <span class="number">11</span></span><br><span class="line">n = <span class="number">26</span></span><br><span class="line"></span><br><span class="line">w = invert(a, n)</span><br><span class="line">print(w)</span><br><span class="line"><span class="comment">//w=19</span></span><br></pre></td></tr></table></figure>
+
+<p>接下来解密</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">w= <span class="number">19</span></span><br><span class="line">text = <span class="string">&#x27;welcylk&#x27;</span></span><br><span class="line">s=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> text:</span><br><span class="line">    m = ord(i)-<span class="number">97</span></span><br><span class="line">    s.append(m)</span><br><span class="line"></span><br><span class="line">print(s)</span><br><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> s:</span><br><span class="line">    n = ((num-<span class="number">6</span>)*w) % <span class="number">26</span> </span><br><span class="line">    print(chr(n+<span class="number">97</span>),end=<span class="string">&quot; &quot;</span>)</span><br><span class="line"><span class="comment">//[22, 4, 11, 2, 24, 11, 10]</span></span><br><span class="line"><span class="comment">//s o r c e r y</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="GKCTF2020-汉字的秘密"><a href="#GKCTF2020-汉字的秘密" class="headerlink" title="[GKCTF2020]汉字的秘密"></a>[GKCTF2020]汉字的秘密</h2><p>打开文件，给了好多字：<br>王壮 夫工 王中 王夫 由由井 井人 夫中 夫夫 井王 土土 夫由<br>土夫 井中 士夫 王工 王人 土由 由口夫<br>考察当铺密码，根据露头的笔画数转换成对应的数字<br>比如 王壮 ，王是6，壮是9，转换成ascii码就是69，<br>我们将上述文字转换成数字：69 74 62 67 118 83 72 77 86 55 71 57 82 57 64 63 51 107<br>通过前四位和 FLAG{的ascii对比发现每一位加上相差逐渐加1</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">s=<span class="string">&#x27;69 74 62 67 118 83 72 77 86 55 71 57 82 57 64 63 51 107&#x27;</span></span><br><span class="line">s=s.split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">flag=<span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">    flag+=chr(int(s[i])+i+<span class="number">1</span>)</span><br><span class="line">print(flag)</span><br><span class="line"><span class="comment">//FLAG&#123;YOU_ARE_GOOD&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/11/GKCTF2020/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-BDJCTF-2nd-crypto" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/11/BDJCTF-2nd-crypto/">BDJCTF 2nd-crypto</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/11/BDJCTF-2nd-crypto/" class="archive-article-date">
+  	<time datetime="2021-04-11T03:47:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="BJDCTF-2nd-签到-y1ng"><a href="#BJDCTF-2nd-签到-y1ng" class="headerlink" title="[BJDCTF 2nd]签到-y1ng"></a>[BJDCTF 2nd]签到-y1ng</h2><p>密文：QkpEe1czbGMwbWVfVDBfQkpEQ1RGfQ==<br>base64解密<br>明文：BJD{W3lc0me_T0_BJDCTF}</p>
+<h2 id="BJDCTF-2nd-老文盲了"><a href="#BJDCTF-2nd-老文盲了" class="headerlink" title="[BJDCTF 2nd]老文盲了"></a>[BJDCTF 2nd]老文盲了</h2><p>罼雧締眔擴灝淛匶襫黼瀬鎶軄鶛驕鳓哵眔鞹鰝<br>查拼音：bì jí dì dà kuò hào zhè jiù shì fǔ lài gē zhí jiē jiāo lè bā dà kuò hào<br>翻译后：bdj{这就是flag直接交了吧}<br>所以flag: BJD{淛匶襫黼瀬鎶軄鶛驕鳓哵}</p>
+<h2 id="BJDCTF-2nd-燕言燕语-y1ng"><a href="#BJDCTF-2nd-燕言燕语-y1ng" class="headerlink" title="[BJDCTF 2nd]燕言燕语-y1ng"></a>[BJDCTF 2nd]燕言燕语-y1ng</h2><p>给了一串字符：79616E7A69205A4A517B78696C7A765F6971737375686F635F73757A6A677D20<br>有点像16进制，转字符得到：yanzi ZJQ{xilzv_iqssuhoc_suzjg}<br><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BB%B4%E5%90%89%E5%B0%BC%E4%BA%9A%E5%AF%86%E7%A0%81/4905472?fr=aladdin">维吉尼亚密码</a>，密钥为yanzi，解码得：BJD{yanzi_jiushige_shabi}</p>
+<h2 id="BJDCTF-2nd-rsa0"><a href="#BJDCTF-2nd-rsa0" class="headerlink" title="[BJDCTF 2nd]rsa0"></a>[BJDCTF 2nd]rsa0</h2><p>根据提示，我们先打开虚拟机链接上：node3.buuoj.cn:28672<br>命令：nc node3.buuoj.cn 28672</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">e=<span class="number">13941167</span></span><br><span class="line">p +q=<span class="number">20433561549830004033927859722221617446325428184135147499680056003616958746301764719196697216527588145986275550082108229298894139893120021923135937263089774</span></span><br><span class="line"></span><br><span class="line">p-q=-<span class="number">4660041178546471195679150567829788285702765719896804838317992525528054466730310571357646810252054573922627587274858799680943878593380600202086377108944920</span></span><br><span class="line"></span><br><span class="line">c=<span class="number">44250071921976446410466284639793464999301328000243546931408284418184331377015213780054890937998531202405116883849274601077008822752087060593155354947343630331399387625256580599254349093835224681055524216427336135051204190961217445551881008817156542261205522032537385064127211172004097788069860882706137556903</span></span><br><span class="line"></span><br><span class="line">flag=??????</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>直接上代码解</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">a = <span class="number">20433561549830004033927859722221617446325428184135147499680056003616958746301764719196697216527588145986275550082108229298894139893120021923135937263089774</span></span><br><span class="line">b = -<span class="number">4660041178546471195679150567829788285702765719896804838317992525528054466730310571357646810252054573922627587274858799680943878593380600202086377108944920</span></span><br><span class="line"></span><br><span class="line">p = (a+b)<span class="comment">//2</span></span><br><span class="line">q = (a-b)<span class="comment">//2</span></span><br><span class="line">e =<span class="number">13941167</span></span><br><span class="line">c = <span class="number">44250071921976446410466284639793464999301328000243546931408284418184331377015213780054890937998531202405116883849274601077008822752087060593155354947343630331399387625256580599254349093835224681055524216427336135051204190961217445551881008817156542261205522032537385064127211172004097788069860882706137556903</span></span><br><span class="line"></span><br><span class="line">n = p*q</span><br><span class="line">phi = (p-<span class="number">1</span>)*(q-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">d = gmpy2.invert(e,phi)</span><br><span class="line">m = pow(c,d,n)</span><br><span class="line"></span><br><span class="line">print(long_to_bytes(m))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//flag&#123;7d5c11dc-da0f-4ae1-ba33-0daf254beefd&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="BJDCTF-2nd-rsa1"><a href="#BJDCTF-2nd-rsa1" class="headerlink" title="[BJDCTF 2nd]rsa1"></a>[BJDCTF 2nd]rsa1</h2><p>连接上node3.buuoj.cn:27742<br>得到</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">e=<span class="number">12416279</span></span><br><span class="line"></span><br><span class="line">p^<span class="number">2</span>+q^<span class="number">2</span>=<span class="number">219560775189921504867784427135946822592754789498353388148354500812646640279725707592831806992625098690288227072465168631431207242006501430740161775202983163345505824136255515714346961740546147608112299763480721308965772867157309339316450823053913160184211390323524390202043223697383358369413667440845982181522</span></span><br><span class="line"></span><br><span class="line">p-q=-<span class="number">145547735020926655323484297882719329977434225939011536081175463015250074292636875248530352837084729647767607626144443241368657858776242309350501678015960</span></span><br><span class="line"></span><br><span class="line">c=<span class="number">76382998807821931180494652497905318908963546751528649674396281178920199185717134690497131599426003728681655055850178005779831329259476905383706755286448266827221789717490739412717934233153391841935190711725975856458381041780024656944349535746768022295523088943393745135354922376366350628540157028221799246077</span></span><br><span class="line"></span><br><span class="line">flag=??????</span><br></pre></td></tr></table></figure>
+<p>我们只要求出p，q就可以求出明文<br>已知p^2+q^2和p-q<br>相当于求解二元二次方程组：p^2+q^2-(p^2+q^2)=0<br>                        p-q-(p-q)=0<br>先解出p和q</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span>  sympy <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span>  sympy.abc <span class="keyword">import</span> p,q</span><br><span class="line">nn = <span class="number">219560775189921504867784427135946822592754789498353388148354500812646640279725707592831806992625098690288227072465168631431207242006501430740161775202983163345505824136255515714346961740546147608112299763480721308965772867157309339316450823053913160184211390323524390202043223697383358369413667440845982181522</span></span><br><span class="line">qjp = <span class="number">145547735020926655323484297882719329977434225939011536081175463015250074292636875248530352837084729647767607626144443241368657858776242309350501678015960</span></span><br><span class="line">aa=solve([p*p+q*q-nn,p-q+qjp],[p,q])</span><br><span class="line">print(aa)</span><br><span class="line"></span><br><span class="line"><span class="comment">//[(-10550134773729563403011975093746856136870037061972031081465112723310970886518995809257807793566974645860312146215324888940453065608203249736642338003109249, -10404587038708636747688490795864136806892602836033019545383937260295720812226358934009277440729889916212544538589180445699084407749427007427291836325093289), (10404587038708636747688490795864136806892602836033019545383937260295720812226358934009277440729889916212544538589180445699084407749427007427291836325093289, 10550134773729563403011975093746856136870037061972031081465112723310970886518995809257807793566974645860312146215324888940453065608203249736642338003109249)]</span></span><br><span class="line"><span class="comment">//两组解 p和q去正的一组</span></span><br></pre></td></tr></table></figure>
+<p>接下来求明文</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gmpy2</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">e = <span class="number">12416279</span></span><br><span class="line">p = <span class="number">10404587038708636747688490795864136806892602836033019545383937260295720812226358934009277440729889916212544538589180445699084407749427007427291836325093289</span></span><br><span class="line">q =  <span class="number">10550134773729563403011975093746856136870037061972031081465112723310970886518995809257807793566974645860312146215324888940453065608203249736642338003109249</span></span><br><span class="line">s = (p-<span class="number">1</span>)*(q-<span class="number">1</span>)</span><br><span class="line">d = gmpy2.invert(e,s)</span><br><span class="line">n=p*q</span><br><span class="line">c=<span class="number">76382998807821931180494652497905318908963546751528649674396281178920199185717134690497131599426003728681655055850178005779831329259476905383706755286448266827221789717490739412717934233153391841935190711725975856458381041780024656944349535746768022295523088943393745135354922376366350628540157028221799246077</span></span><br><span class="line">m=pow(c,d,n)</span><br><span class="line">print(long_to_bytes(m))</span><br><span class="line"><span class="comment">//flag&#123;17da208f-709e-49b1-8ed0-a3b009e01747&#125;</span></span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/11/BDJCTF-2nd-crypto/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-刷题记录（四）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -567,7 +714,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="写题报告"><a href="#写题报告" class="headerlink" title="写题报告"></a>写题报告</h2><pre><code>在buu上刷密码题，了解了中文电报码及其原理、栅栏密码的加密方式，并尝试用代码解题。
-写题过程中发现不同密码会相互结合，例如变异的凯撒，就是ASCii编码和凯撒密码的算法相结合。此外buu上的rsa没写出来（继续研究研究）。</code></pre>
+写题过程中发现不同密码会相互结合，例如变异的凯撒，就是ASCii编码和凯撒密码的算法相结合。此外buu上的rsa没写出来（继续研究研究）。
+</code></pre>
 <h2 id="python学习"><a href="#python学习" class="headerlink" title="python学习"></a>python学习</h2><pre><code>1.多个变量赋值
 2.python算术运算符
     例如&quot;//”向下取整、“%”取模（返回除法的余数）、“**”幂......
@@ -579,7 +727,8 @@
 5.input()函数
     打印括号里的东西，并要求用户输入字符串（输入字符串的时候必须使用引号将它括起来）
 6.int()函数
-    int() 函数用于将一个字符串或数字转换为整型。</code></pre>
+    int() 函数用于将一个字符串或数字转换为整型。
+</code></pre>
 
       
 
@@ -751,149 +900,10 @@
 
 
   
-    <article id="post-变异凯撒" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/06/%E5%8F%98%E5%BC%82%E5%87%AF%E6%92%92/">变异凯撒</a>
-    </h1>
-  
-
-        
-        <a href="/2020/12/06/%E5%8F%98%E5%BC%82%E5%87%AF%E6%92%92/" class="archive-article-date">
-  	<time datetime="2020-12-06T01:47:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="写题过程"><a href="#写题过程" class="headerlink" title="写题过程"></a>写题过程</h2><p>加密密文：afZ_r9VYfScOeO_UL^RWUc<br>格式：flag{ }<br>这里我们发现a, f, Z, _的ASCii码是 97， 102， 90， 95</p>
-<p>而再看这里flag{}的ASCii码是——–102，108，97，103；</p>
-<p>这时你会发现                                   5   ， 6   ，7 ，  8</p>
-<p>于是发现是按顺序从5开始从每个递增加上1.<br>写一段带就可以解出flag</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">str=<span class="string">&quot;afZ_r9VYfScOeO_UL^RWUc&quot;</span></span><br><span class="line">i =<span class="number">5</span></span><br><span class="line">flag=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> str:</span><br><span class="line">    flag+=chr(ord(s)+i)</span><br><span class="line">    i+=<span class="number">1</span></span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
-<p>解得flag{Caesar_variation}<br>```</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/06/%E5%8F%98%E5%BC%82%E5%87%AF%E6%92%92/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/29/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/29/hello-world/" class="archive-article-date">
-  	<time datetime="2020-11-29T07:34:22.964Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/29/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+    </nav>
   
 
 
