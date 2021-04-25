@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Hexo</title>
+  <title>同于及四大定理 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/page/2/index.html">
+  <meta name="description" content="同余概念：给定一个正整数m，如果两个整数a和b满足a-b能够被m整除，即(a-b)&#x2F;m得到一个整数，那么就称整数a与b对模m同余，记作a≡b(mod m)。对模m同余是整数的一个等价关系。 定义：设m是大于1的正整数，a、b是整数，如果m|(a-b)，则称a与b关于模m同余，记作a≡b(mod m)，读作a与b对模m同余。显然,有如下事实（1）若a≡0(mod m)，则m|a；（2）a≡b(mod">
+<meta property="og:type" content="article">
+<meta property="og:title" content="同于及四大定理">
+<meta property="og:url" content="http://example.com/2021/04/25/%E5%90%8C%E4%BA%8E%E5%8F%8A%E5%9B%9B%E5%A4%A7%E5%AE%9A%E7%90%86/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="同余概念：给定一个正整数m，如果两个整数a和b满足a-b能够被m整除，即(a-b)&#x2F;m得到一个整数，那么就称整数a与b对模m同余，记作a≡b(mod m)。对模m同余是整数的一个等价关系。 定义：设m是大于1的正整数，a、b是整数，如果m|(a-b)，则称a与b关于模m同余，记作a≡b(mod m)，读作a与b对模m同余。显然,有如下事实（1）若a≡0(mod m)，则m|a；（2）a≡b(mod">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-04-25T04:18:05.000Z">
+<meta property="article:modified_time" content="2021-04-25T06:00:00.398Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -150,33 +154,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-信息化时代的步伐" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-同于及四大定理" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/06/%E4%BF%A1%E6%81%AF%E5%8C%96%E6%97%B6%E4%BB%A3%E7%9A%84%E6%AD%A5%E4%BC%90/">信息化时代的步伐</a>
+    <h1 class="article-title" itemprop="name">
+      同于及四大定理
     </h1>
   
 
         
-        <a href="/2020/12/06/%E4%BF%A1%E6%81%AF%E5%8C%96%E6%97%B6%E4%BB%A3%E7%9A%84%E6%AD%A5%E4%BC%90/" class="archive-article-date">
-  	<time datetime="2020-12-06T03:39:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-06</time>
+        <a href="/2021/04/25/%E5%90%8C%E4%BA%8E%E5%8F%8A%E5%9B%9B%E5%A4%A7%E5%AE%9A%E7%90%86/" class="archive-article-date">
+  	<time datetime="2021-04-25T04:18:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-25</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h2><p>打开文件发现有一串数字606046152623600817831216121621196386<br>全为数字的密码很容易想到中文电报码<br>解码得flag<br><img src="C:\Users\lighthouse\Desktop\blogt"></p>
-<h2 id="知识总结"><a href="#知识总结" class="headerlink" title="知识总结"></a>知识总结</h2><p>原理：中文电码表采用了四位阿拉伯数字作代号，从0001到9999按四位数顺序排列，用四位数字表示最多一万个汉字、字母和符号。<br><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B8%AD%E6%96%87%E7%94%B5%E7%A0%81/2667759?fr=aladdin">更多知识点这里</a></p>
+        <h2 id="同余"><a href="#同余" class="headerlink" title="同余"></a>同余</h2><p>概念：<br>给定一个正整数m，如果两个整数a和b满足a-b能够被m整除，即(a-b)/m得到一个整数，那么就称整数a与b对模m同余，记作a≡b(mod m)。对模m同余是整数的一个等价关系。</p>
+<p>定义：<br>设m是大于1的正整数，a、b是整数，如果m|(a-b)，则称a与b关于模m同余，记作a≡b(mod m)，读作a与b对模m同余。<br>显然,有如下事实<br>（1）若a≡0(mod m)，则m|a；<br>（2）a≡b(mod m)等价于a与b分别用m去除，余数相同。</p>
+<p>性质<br>1.反身性：a≡a (mod m)；<br>2.对称性：若a≡b(mod m)，则b≡a (mod m)；<br>3.传递性：若a≡b(mod m)，b≡c(mod m)，则a≡c(mod m)；<br>4.同余式相加：若a≡b(mod m)，c≡d(mod m)，则a c≡b d(mod m)；<br>5.同余式相乘：若a≡b(mod m)，c≡d(mod m)，则ac≡bd(mod m)。<br>6.线性运算：如果a ≡ b (mod m)，c ≡ d (mod m)，那么<br>           (1)a ± c ≡ b ± d (mod m)；<br>           (2)a * c ≡ b * d (mod m)。</p>
+<h2 id="同余类"><a href="#同余类" class="headerlink" title="同余类"></a>同余类</h2><p>如同任何同余关系，对于模n同余是一种等价关系，整数m的等价类是一个集合{…,a-n,a,a+n,…},这个集合称为同余类。</p>
+<h2 id="余数系统"><a href="#余数系统" class="headerlink" title="余数系统"></a>余数系统</h2><p>即模n同余类的代表数的集合，通常使用的代表数是最小非负整数，因为它是除法中的应当余数。要注意的是，对于同一个模数n，不同的同余类不等价，亦即，属于不同同余类的整数不同余于模数n，或者说，模n余数系统中的任二元素不同余于模n；而且，整数域中的每个整数只属于模数n的一个同余类，因为模n将整数域划分为互斥区块，每个区块是一个同余类。<br>完整余数系统：指的是模n的全部同余类的代表数的集合。如果该集合是由每个同余类的最小非负整数所组成，亦即{0,1,2,…,n-1}，则称该集合为模n的最小余数系统</p>
+<h2 id="简约余数系统-简系"><a href="#简约余数系统-简系" class="headerlink" title="简约余数系统(简系)"></a>简约余数系统(简系)</h2><p>模n完整余数系统中，与模n互质的代表数所构成的集合，称为模n的简约余数系统，其元素个数记为Φ(n)。<br>果模n是质数，那么它的最小简约余数系统是{1,2,…,n-1}，只比最小余数系统少一个0。<br>【定理1】x1,x2,…,x[f(m)]是模m的简系的充要条件是(x ,m)=1且x,x[j]不同余于m(i≠j,i,j=1,2,…,f(m)).<br>【定理2】在模m的一个完系中,取出所有与m互质的数组成的数组就是一个模m的简系.<br>【定理3】若(a,m)=1,且x1,x2…,x[f(m)]是模m的简系,则模ax1,ax2,…,ax[f(m)]也是模m的简系.</p>
+<h2 id="欧拉定理"><a href="#欧拉定理" class="headerlink" title="欧拉定理"></a>欧拉定理</h2><p>设a,m∈N，(a,m)=1，则a^Φ(m)≡1(modm)<br>(注：φ(m)指模m的简系个数， φ(m)=m-1，如果m是素数；<br>            Φ(m=q1^r1 x q2^r2 x … x qi^ri)=m(1-1/q1)(1-1/q2)…(1-1/qi)<br>)</p>
+<h2 id="费马小定理"><a href="#费马小定理" class="headerlink" title="费马小定理"></a>费马小定理</h2><p>若p为质数，则a^p ≡ a(modp) 即a^(p-1) ≡ 1(modp)（但是当p|a时不等价）</p>
+<h2 id="威尔逊定理"><a href="#威尔逊定理" class="headerlink" title="威尔逊定理"></a>威尔逊定理</h2><p>当且仅当p为素数时：( p -1 )! ≡ -1 ( mod p )<br>或者这么写( p -1 )! ≡ p-1 ( mod p )<br>或者说若p为质数，则p能被(p-1)!+1整除</p>
+<h2 id="中国剩余定理"><a href="#中国剩余定理" class="headerlink" title="中国剩余定理"></a>中国剩余定理</h2><p>一元线性同余方程组：<br>                 x ≡ a1(mod m1)<br>                 x ≡ a2(mod mn)<br>                 …<br>                 x ≡ an(mod mn)<br>中国剩余定理说明：假设整数m1,m2, … ,mn两两互质，则对任意的整数：a1,a2, … ,an，方程组有解。<br>设是整数M是m1,m2,… ,mn的乘积<br>设Mi = M/mi,是除了mi以外的n- 1个整数的乘积.<br>ti = Mi^-1<br>通解为：x=a1t1M1 + a2t2M2 +…+ antnmn +kM</p>
 
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -185,16 +216,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/06/%E4%BF%A1%E6%81%AF%E5%8C%96%E6%97%B6%E4%BB%A3%E7%9A%84%E6%AD%A5%E4%BC%90/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/04/25/%E5%90%8C%E4%BA%8E%E5%8F%8A%E5%9B%9B%E5%A4%A7%E5%AE%9A%E7%90%86/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2021/04/25/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95-%E4%BA%94/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">刷题记录(五)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -214,220 +304,14 @@
 
 
 
-
-  
-    <article id="post-丢失的MD5" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/06/%E4%B8%A2%E5%A4%B1%E7%9A%84MD5/">丢失的MD5</a>
-    </h1>
-  
-
-        
-        <a href="/2020/12/06/%E4%B8%A2%E5%A4%B1%E7%9A%84MD5/" class="archive-article-date">
-  	<time datetime="2020-12-06T02:56:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h2><p>打开文件发现有一个py，本地运行出错<br>报错情况：TypeError: Unicode-objects must be encoded before hashing<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010082526/article/details/81064957">戳这里</a><br>接下来对原码进行修改<br>原码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib  </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">32</span>,<span class="number">127</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">32</span>,<span class="number">127</span>):</span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">32</span>,<span class="number">127</span>):</span><br><span class="line">            m=hashlib.md5()</span><br><span class="line">            m.update(<span class="string">&#x27;TASC&#x27;</span>+chr(i)+<span class="string">&#x27;O3RJMV&#x27;</span>+chr(j)+<span class="string">&#x27;WDJKX&#x27;</span>+chr(k)+<span class="string">&#x27;ZM&#x27;</span>)</span><br><span class="line">            des=m.hexdigest()</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;e9032&#x27;</span> <span class="keyword">in</span> des and <span class="string">&#x27;da&#x27;</span> <span class="keyword">in</span> des and <span class="string">&#x27;911513&#x27;</span> <span class="keyword">in</span> des:</span><br><span class="line">                print des</span><br></pre></td></tr></table></figure>
-<p>  修改后：<br>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">32</span>,<span class="number">127</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">32</span>,<span class="number">127</span>):</span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">32</span>,<span class="number">127</span>):</span><br><span class="line">            m=hashlib.md5()</span><br><span class="line">            m.update(<span class="string">&#x27;TASC&#x27;</span>.encode(<span class="string">&#x27;utf-8&#x27;</span>)+chr(i).encode(<span class="string">&#x27;utf-8&#x27;</span>)+<span class="string">&#x27;O3RJMV&#x27;</span>.encode(<span class="string">&#x27;utf-8&#x27;</span>)+chr(j).encode(<span class="string">&#x27;utf-8&#x27;</span>)+<span class="string">&#x27;WDJKX&#x27;</span>.encode(<span class="string">&#x27;utf-8&#x27;</span>)+chr(k).encode(<span class="string">&#x27;utf-8&#x27;</span>)+<span class="string">&#x27;ZM&#x27;</span>.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">            des=m.hexdigest()</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;e9032&#x27;</span> <span class="keyword">in</span> des and <span class="string">&#x27;da&#x27;</span> <span class="keyword">in</span> des and <span class="string">&#x27;911513&#x27;</span> <span class="keyword">in</span> des:</span><br><span class="line">                print (des)</span><br></pre></td></tr></table></figure><br>运行后得e9032994dabac08080091151380478a2</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/06/%E4%B8%A2%E5%A4%B1%E7%9A%84MD5/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-变异凯撒" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/06/%E5%8F%98%E5%BC%82%E5%87%AF%E6%92%92/">变异凯撒</a>
-    </h1>
-  
-
-        
-        <a href="/2020/12/06/%E5%8F%98%E5%BC%82%E5%87%AF%E6%92%92/" class="archive-article-date">
-  	<time datetime="2020-12-06T01:47:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="写题过程"><a href="#写题过程" class="headerlink" title="写题过程"></a>写题过程</h2><p>加密密文：afZ_r9VYfScOeO_UL^RWUc<br>格式：flag{ }<br>这里我们发现a, f, Z, _的ASCii码是 97， 102， 90， 95</p>
-<p>而再看这里flag{}的ASCii码是——–102，108，97，103；</p>
-<p>这时你会发现                                   5   ， 6   ，7 ，  8</p>
-<p>于是发现是按顺序从5开始从每个递增加上1.<br>写一段带就可以解出flag</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">str=<span class="string">&quot;afZ_r9VYfScOeO_UL^RWUc&quot;</span></span><br><span class="line">i =<span class="number">5</span></span><br><span class="line">flag=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> str:</span><br><span class="line">    flag+=chr(ord(s)+i)</span><br><span class="line">    i+=<span class="number">1</span></span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
-<p>解得flag{Caesar_variation}<br>```</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/06/%E5%8F%98%E5%BC%82%E5%87%AF%E6%92%92/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/29/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2020/11/29/hello-world/" class="archive-article-date">
-  	<time datetime="2020-11-29T07:34:22.964Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/11/29/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -450,8 +334,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
